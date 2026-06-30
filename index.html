@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>星辰智能体课程刷题页</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">纯静态 · 响应式 · 支持本地进度保存</p>
+        <h1>星辰智能体课程刷题页</h1>
+        <p class="hero-desc">题目和答案解析已从你的两个文档中整理完成，电脑和手机都能顺畅练题。</p>
+      </div>
+      <div class="hero-actions">
+        <button id="toggleNavBtn" class="ghost-btn mobile-only" type="button">题号面板</button>
+        <button id="resetAllBtn" class="ghost-btn" type="button">清空进度</button>
+      </div>
+    </header>
+
+    <section class="stats-bar" aria-label="答题统计">
+      <article class="stat-card">
+        <span class="stat-label">总题数</span>
+        <strong id="totalCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span class="stat-label">已作答</span>
+        <strong id="answeredCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span class="stat-label">答对</span>
+        <strong id="correctCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span class="stat-label">正确率</span>
+        <strong id="accuracyRate">0%</strong>
+      </article>
+    </section>
+
+    <main class="layout">
+      <aside id="sidebar" class="sidebar">
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>题型筛选</h2>
+            <span id="filterSummary" class="muted-text">全部题目</span>
+          </div>
+          <div id="filterBar" class="filter-bar"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>练习进度</h2>
+            <span id="progressLabel" class="muted-text">0 / 0</span>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+          <div class="legend">
+            <span><i class="dot current"></i>当前</span>
+            <span><i class="dot correct"></i>答对</span>
+            <span><i class="dot wrong"></i>答错</span>
+            <span><i class="dot pending"></i>未答</span>
+          </div>
+        </section>
+
+        <section class="panel question-nav-panel">
+          <div class="panel-heading">
+            <h2>题号导航</h2>
+            <span id="navCount" class="muted-text">0 题</span>
+          </div>
+          <div id="questionNav" class="question-nav" aria-label="题号导航"></div>
+        </section>
+      </aside>
+
+      <section class="content">
+        <section class="panel question-panel">
+          <div class="question-toolbar">
+            <div>
+              <span id="questionBadge" class="question-badge">单选题</span>
+              <span id="questionIndex" class="question-index">第 1 题</span>
+            </div>
+            <div class="toolbar-actions">
+              <button id="prevBtn" class="ghost-btn" type="button">上一题</button>
+              <button id="nextBtn" class="ghost-btn" type="button">下一题</button>
+            </div>
+          </div>
+
+          <article class="question-card">
+            <h2 id="questionTitle" class="question-title"></h2>
+            <div id="optionsWrap" class="options-wrap"></div>
+          </article>
+
+          <div class="question-actions">
+            <button id="clearCurrentBtn" class="ghost-btn" type="button">重置本题</button>
+          </div>
+
+          <section id="resultPanel" class="result-panel hidden" aria-live="polite">
+            <div class="result-header">
+              <strong id="resultTitle"></strong>
+              <span id="resultAnswer" class="answer-chip"></span>
+            </div>
+            <p id="resultMessage" class="result-message"></p>
+            <div class="analysis-block">
+              <h3>答案解析</h3>
+              <p id="resultExplanation"></p>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="./quiz-data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
