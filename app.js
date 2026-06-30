@@ -60,6 +60,8 @@ const elements = {
   toggleNavBtn: document.querySelector("#toggleNavBtn"),
   toggleMinimalModeBtn: document.querySelector("#toggleMinimalModeBtn"),
   toggleFocusModeBtn: document.querySelector("#toggleFocusModeBtn"),
+  closeSidebarBtn: document.querySelector("#closeSidebarBtn"),
+  sidebarOverlay: document.querySelector("#sidebarOverlay"),
   sidebar: document.querySelector("#sidebar"),
 };
 
@@ -104,9 +106,19 @@ function isMobileViewport() {
   return window.matchMedia("(max-width: 768px)").matches;
 }
 
+function setSidebarOpen(isOpen) {
+  const shouldOpen = isOpen && isMobileViewport();
+  elements.sidebar.classList.toggle("open", shouldOpen);
+  elements.sidebarOverlay.classList.toggle("hidden", !shouldOpen);
+  document.body.classList.toggle("sidebar-open", shouldOpen);
+}
+
 function syncMobileModes() {
   document.body.classList.toggle("mobile-minimal-mode", isMobileViewport() && state.mobileMinimalMode);
   document.body.classList.toggle("mobile-focus-mode", isMobileViewport() && state.mobileFocusMode);
+  if (!isMobileViewport()) {
+    setSidebarOpen(false);
+  }
 
   if (elements.toggleMinimalModeBtn) {
     elements.toggleMinimalModeBtn.classList.toggle("active", state.mobileMinimalMode);
@@ -222,6 +234,7 @@ function jumpToQuestion(questionId) {
   const nextIndex = visible.findIndex((item) => item.id === questionId);
   if (nextIndex >= 0) {
     state.currentIndex = nextIndex;
+    setSidebarOpen(false);
     renderQuestion();
     renderNav();
   }
@@ -316,6 +329,7 @@ function renderQuestion() {
       <button class="${classNames.join(" ")}" type="button" data-option-key="${option.key}">
         <span class="option-key">${option.key}</span>
         <span class="option-text">${option.text}</span>
+        ${isSelected ? '<span class="selected-flag">已选</span>' : ""}
       </button>
     `;
   }).join("");
@@ -387,8 +401,10 @@ elements.resetAllBtn.addEventListener("click", resetAllProgress);
 elements.prevBtn.addEventListener("click", () => moveQuestion(-1));
 elements.nextBtn.addEventListener("click", () => moveQuestion(1));
 elements.toggleNavBtn.addEventListener("click", () => {
-  elements.sidebar.classList.toggle("open");
+  setSidebarOpen(!elements.sidebar.classList.contains("open"));
 });
+elements.closeSidebarBtn.addEventListener("click", () => setSidebarOpen(false));
+elements.sidebarOverlay.addEventListener("click", () => setSidebarOpen(false));
 elements.toggleMinimalModeBtn.addEventListener("click", () => {
   state.mobileMinimalMode = !state.mobileMinimalMode;
   saveMode(MOBILE_MINIMAL_MODE_KEY, state.mobileMinimalMode);

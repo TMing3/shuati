@@ -44,7 +44,12 @@
     </section>
 
     <main class="layout">
+      <div id="sidebarOverlay" class="sidebar-overlay hidden mobile-only" aria-hidden="true"></div>
       <aside id="sidebar" class="sidebar">
+        <div class="sidebar-mobile-header mobile-only">
+          <strong>题号面板</strong>
+          <button id="closeSidebarBtn" class="ghost-btn" type="button" aria-label="关闭题号面板">关闭</button>
+        </div>
         <section class="panel">
           <div class="panel-heading">
             <h2>题型筛选</h2>

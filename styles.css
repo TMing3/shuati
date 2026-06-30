@@ -349,11 +349,13 @@ button {
   padding: 18px 18px 18px 20px;
   background: #f9fbff;
   border-color: #dbe5f5;
+  position: relative;
 }
 
 .option-btn.selected {
-  border-color: rgba(54, 98, 255, 0.5);
-  background: rgba(54, 98, 255, 0.08);
+  border-color: rgba(54, 98, 255, 0.9);
+  background: rgba(54, 98, 255, 0.14);
+  box-shadow: inset 0 0 0 2px rgba(54, 98, 255, 0.38), 0 0 0 1px rgba(54, 98, 255, 0.18);
 }
 
 .option-btn.correct {
@@ -377,6 +379,25 @@ button {
   background: #fff;
   border: 1px solid #d8e2f0;
   font-weight: 700;
+}
+
+.option-btn.selected .option-key {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.selected-flag {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
 }
 
 .option-text {
@@ -453,6 +474,18 @@ button {
 }
 
 .mobile-only {
+  display: none;
+}
+
+.sidebar-open {
+  overflow: hidden;
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
+.sidebar-mobile-header {
   display: none;
 }
 
@@ -549,6 +582,31 @@ button {
     display: inline-flex;
   }
 
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 18;
+    background: rgba(15, 23, 42, 0.42);
+    backdrop-filter: blur(2px);
+  }
+
+  .sidebar-overlay:not(.hidden) {
+    display: block;
+  }
+
+  .sidebar-mobile-header {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: var(--shadow);
+  }
+
   .sidebar {
     display: none;
   }
@@ -557,11 +615,15 @@ button {
     display: grid;
     position: fixed;
     inset: 8px;
-    z-index: 20;
+    z-index: 19;
     max-height: none;
     overflow: auto;
     padding: 0;
     background: transparent;
+  }
+
+  .sidebar.open .sidebar-mobile-header {
+    display: flex;
   }
 
   .sidebar.open .panel {
@@ -718,6 +780,13 @@ button {
     margin-top: 8px;
     padding-top: 8px;
   }
+
+  body.mobile-minimal-mode .selected-flag {
+    top: 8px;
+    right: 8px;
+    padding: 1px 6px;
+    font-size: 11px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -750,5 +819,24 @@ button {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .option-btn.selected {
+    background: rgba(96, 165, 250, 0.22);
+    border-color: rgba(147, 197, 253, 0.95);
+    box-shadow: inset 0 0 0 2px rgba(147, 197, 253, 0.55), 0 0 0 1px rgba(147, 197, 253, 0.18);
+  }
+
+  .option-btn.selected .option-key {
+    background: #93c5fd;
+    color: #0f172a;
+    border-color: #93c5fd;
+  }
+
+  .selected-flag {
+    background: #93c5fd;
+    color: #0f172a;
   }
 }
