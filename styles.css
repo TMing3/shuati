@@ -396,6 +396,17 @@ button {
   color: var(--text);
 }
 
+.mode-switches {
+  display: flex;
+  gap: 6px;
+}
+
+.mode-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
 .primary-btn {
   background: linear-gradient(135deg, #4474ff, #2757f6);
   color: #fff;
@@ -520,6 +531,8 @@ button {
     width: auto;
     display: flex;
     gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
   .toolbar-actions button,
@@ -627,6 +640,84 @@ button {
   .analysis-block h3 {
     font-size: 14px;
   }
+
+  body.mobile-focus-mode .toolbar-actions,
+  body.mobile-focus-mode .question-actions {
+    display: none;
+  }
+
+  body.mobile-minimal-mode .hero {
+    margin-bottom: 4px;
+    padding: 6px 8px;
+    gap: 6px;
+    border-radius: 12px;
+  }
+
+  body.mobile-minimal-mode .hero h1 {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  body.mobile-minimal-mode .hero-actions {
+    gap: 4px;
+  }
+
+  body.mobile-minimal-mode .hero-actions .ghost-btn {
+    min-height: 28px;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+
+  body.mobile-minimal-mode #resetAllBtn {
+    display: none;
+  }
+
+  body.mobile-minimal-mode .question-panel {
+    padding: 8px;
+  }
+
+  body.mobile-minimal-mode .question-card,
+  body.mobile-minimal-mode .result-panel {
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  body.mobile-minimal-mode .question-card {
+    margin: 6px 0;
+  }
+
+  body.mobile-minimal-mode .question-title {
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  body.mobile-minimal-mode .options-wrap {
+    gap: 6px;
+  }
+
+  body.mobile-minimal-mode .option-btn {
+    padding: 10px;
+  }
+
+  body.mobile-minimal-mode .option-key {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    font-size: 12px;
+  }
+
+  body.mobile-minimal-mode .option-text,
+  body.mobile-minimal-mode .result-message,
+  body.mobile-minimal-mode .analysis-block p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  body.mobile-minimal-mode .analysis-block {
+    margin-top: 8px;
+    padding-top: 8px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -652,5 +743,12 @@ button {
 
   .toolbar-actions {
     margin-left: auto;
+  }
+
+  body.mobile-minimal-mode .hero h1 {
+    max-width: 96px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }

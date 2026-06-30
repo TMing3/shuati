@@ -1,4 +1,6 @@
 const STORAGE_KEY = "star-maas-quiz-progress-v1";
+const MOBILE_MINIMAL_MODE_KEY = "star-maas-mobile-minimal-mode-v1";
+const MOBILE_FOCUS_MODE_KEY = "star-maas-mobile-focus-mode-v1";
 
 const FILTERS = [
   { key: "all", label: "全部", match: () => true },
@@ -56,6 +58,8 @@ const elements = {
   clearCurrentBtn: document.querySelector("#clearCurrentBtn"),
   resetAllBtn: document.querySelector("#resetAllBtn"),
   toggleNavBtn: document.querySelector("#toggleNavBtn"),
+  toggleMinimalModeBtn: document.querySelector("#toggleMinimalModeBtn"),
+  toggleFocusModeBtn: document.querySelector("#toggleFocusModeBtn"),
   sidebar: document.querySelector("#sidebar"),
 };
 
@@ -63,6 +67,8 @@ const state = {
   filter: "all",
   currentIndex: 0,
   progress: loadProgress(),
+  mobileMinimalMode: loadMode(MOBILE_MINIMAL_MODE_KEY, false),
+  mobileFocusMode: loadMode(MOBILE_FOCUS_MODE_KEY, true),
 };
 
 function loadProgress() {
@@ -78,6 +84,39 @@ function loadProgress() {
 
 function saveProgress() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
+}
+
+function loadMode(storageKey, defaultValue) {
+  try {
+    const raw = localStorage.getItem(storageKey);
+    if (raw === null) return defaultValue;
+    return raw === "true";
+  } catch {
+    return defaultValue;
+  }
+}
+
+function saveMode(storageKey, value) {
+  localStorage.setItem(storageKey, String(value));
+}
+
+function isMobileViewport() {
+  return window.matchMedia("(max-width: 768px)").matches;
+}
+
+function syncMobileModes() {
+  document.body.classList.toggle("mobile-minimal-mode", isMobileViewport() && state.mobileMinimalMode);
+  document.body.classList.toggle("mobile-focus-mode", isMobileViewport() && state.mobileFocusMode);
+
+  if (elements.toggleMinimalModeBtn) {
+    elements.toggleMinimalModeBtn.classList.toggle("active", state.mobileMinimalMode);
+    elements.toggleMinimalModeBtn.textContent = state.mobileMinimalMode ? "极简开" : "极简";
+  }
+
+  if (elements.toggleFocusModeBtn) {
+    elements.toggleFocusModeBtn.classList.toggle("active", state.mobileFocusMode);
+    elements.toggleFocusModeBtn.textContent = state.mobileFocusMode ? "专注开" : "专注";
+  }
 }
 
 function getVisibleQuestions() {
@@ -316,6 +355,7 @@ function render() {
   if (state.currentIndex >= visible.length) {
     state.currentIndex = Math.max(visible.length - 1, 0);
   }
+  syncMobileModes();
   renderFilters();
   renderStats();
   renderNav();
@@ -349,5 +389,16 @@ elements.nextBtn.addEventListener("click", () => moveQuestion(1));
 elements.toggleNavBtn.addEventListener("click", () => {
   elements.sidebar.classList.toggle("open");
 });
+elements.toggleMinimalModeBtn.addEventListener("click", () => {
+  state.mobileMinimalMode = !state.mobileMinimalMode;
+  saveMode(MOBILE_MINIMAL_MODE_KEY, state.mobileMinimalMode);
+  render();
+});
+elements.toggleFocusModeBtn.addEventListener("click", () => {
+  state.mobileFocusMode = !state.mobileFocusMode;
+  saveMode(MOBILE_FOCUS_MODE_KEY, state.mobileFocusMode);
+  render();
+});
+window.addEventListener("resize", syncMobileModes);
 
 render();
