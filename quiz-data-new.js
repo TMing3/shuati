@@ -2,7 +2,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 1,
     "type": "single",
-    "question": "机器学习的基本框架可以概括为",
+    "question": "机器学习的基本框架可以概括为？",
     "options": [
       {
         "key": "A",
@@ -27,7 +27,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 2,
     "type": "single",
-    "question": "深度学习中，感知机的核心计算是",
+    "question": "深度学习中，感知机的核心计算是？",
     "options": [
       {
         "key": "A",
@@ -52,7 +52,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 3,
     "type": "single",
-    "question": "以下哪个网络结构通过\"跨层直连\"解决梯度弥散问题",
+    "question": "以下哪个网络结构通过\"跨层直连\"解决梯度弥散问题？",
     "options": [
       {
         "key": "A",
@@ -77,7 +77,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 4,
     "type": "single",
-    "question": "Transformer的核心机制是",
+    "question": "Transformer的核心机制是？",
     "options": [
       {
         "key": "A",
@@ -102,7 +102,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 5,
     "type": "single",
-    "question": "自监督学习的核心思想是",
+    "question": "自监督学习的核心思想是？",
     "options": [
       {
         "key": "A",
@@ -127,7 +127,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 6,
     "type": "single",
-    "question": "ChatGPT中\"智能涌现\"现象出现在参数量达到什么量级时",
+    "question": "ChatGPT中\"智能涌现\"现象出现在参数量达到什么量级时？",
     "options": [
       {
         "key": "A",
@@ -152,7 +152,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 7,
     "type": "single",
-    "question": "Instruct GPT的核心贡献是",
+    "question": "Instruct GPT的核心贡献是？",
     "options": [
       {
         "key": "A",
@@ -177,7 +177,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 8,
     "type": "single",
-    "question": "大语言模型的本质工作方式是",
+    "question": "大语言模型的本质工作方式是？",
     "options": [
       {
         "key": "A",
@@ -202,7 +202,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 9,
     "type": "single",
-    "question": "CLIP模型的训练方式是",
+    "question": "CLIP模型的训练方式是？",
     "options": [
       {
         "key": "A",
@@ -227,7 +227,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 10,
     "type": "single",
-    "question": "MAE（掩码自编码器）的预训练方式是",
+    "question": "MAE（掩码自编码器）的预训练方式是？",
     "options": [
       {
         "key": "A",
@@ -252,7 +252,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 11,
     "type": "single",
-    "question": "多模态大模型的核心思路是",
+    "question": "多模态大模型的核心思路是？",
     "options": [
       {
         "key": "A",
@@ -277,7 +277,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 12,
     "type": "single",
-    "question": "DeepSeek V3的训练成本约为",
+    "question": "DeepSeek V3的训练成本约为？",
     "options": [
       {
         "key": "A",
@@ -302,7 +302,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 13,
     "type": "single",
-    "question": "DeepSeek R1的核心突破方向是",
+    "question": "DeepSeek R1的核心突破方向是？",
     "options": [
       {
         "key": "A",
@@ -327,7 +327,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 14,
     "type": "single",
-    "question": "中国电信星辰大模型的特点是",
+    "question": "中国电信星辰大模型的特点是？",
     "options": [
       {
         "key": "A",
@@ -352,7 +352,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 15,
     "type": "single",
-    "question": "智能体的核心组成要素是",
+    "question": "智能体的核心组成要素是？",
     "options": [
       {
         "key": "A",
@@ -377,7 +377,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 16,
     "type": "single",
-    "question": "以下哪种智能体类型是产业落地的主流",
+    "question": "以下哪种智能体类型是产业落地的主流？",
     "options": [
       {
         "key": "A",
@@ -402,7 +402,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 17,
     "type": "single",
-    "question": "超级智能体的核心运行环境是",
+    "question": "超级智能体的核心运行环境是？",
     "options": [
       {
         "key": "A",
@@ -427,7 +427,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 18,
     "type": "single",
-    "question": "工作流智能体的特点是",
+    "question": "工作流智能体的特点是？",
     "options": [
       {
         "key": "A",
@@ -452,7 +452,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 19,
     "type": "single",
-    "question": "RAG技术主要解决大模型的哪些问题",
+    "question": "RAG技术主要解决大模型的哪些问题？",
     "options": [
       {
         "key": "A",
@@ -477,7 +477,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 20,
     "type": "single",
-    "question": "RAG的混合检索策略是指",
+    "question": "RAG的混合检索策略是指？",
     "options": [
       {
         "key": "A",
@@ -502,7 +502,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 21,
     "type": "single",
-    "question": "思维链（CoT）提示词的核心作用是",
+    "question": "思维链（CoT）提示词的核心作用是？",
     "options": [
       {
         "key": "A",
@@ -527,7 +527,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 22,
     "type": "single",
-    "question": "ReAct框架的执行流程是",
+    "question": "ReAct框架的执行流程是？",
     "options": [
       {
         "key": "A",
@@ -552,7 +552,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 23,
     "type": "single",
-    "question": "MCP协议的全称是",
+    "question": "MCP协议的全称是？",
     "options": [
       {
         "key": "A",
@@ -577,7 +577,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 24,
     "type": "single",
-    "question": "MCP协议被比喻为AI领域的什么",
+    "question": "MCP协议被比喻为AI领域的什么？",
     "options": [
       {
         "key": "A",
@@ -602,7 +602,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 25,
     "type": "single",
-    "question": "LoRA微调技术的核心原理是",
+    "question": "LoRA微调技术的核心原理是？",
     "options": [
       {
         "key": "A",
@@ -627,7 +627,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 26,
     "type": "single",
-    "question": "Adapter Tuning微调技术的特点是",
+    "question": "Adapter Tuning微调技术的特点是？",
     "options": [
       {
         "key": "A",
@@ -652,7 +652,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 27,
     "type": "single",
-    "question": "Prefix Tuning微调技术的做法是",
+    "question": "Prefix Tuning微调技术的做法是？",
     "options": [
       {
         "key": "A",
@@ -677,7 +677,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 28,
     "type": "single",
-    "question": "智能体设计方法论中，场景决策阶段的首要原则是",
+    "question": "智能体设计方法论中，场景决策阶段的首要原则是？",
     "options": [
       {
         "key": "A",
@@ -702,7 +702,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 29,
     "type": "single",
-    "question": "适合智能体的场景四要点中，\"复杂业务需求\"对应推荐哪种模式",
+    "question": "适合智能体的场景四要点中，\"复杂业务需求\"对应推荐哪种模式？",
     "options": [
       {
         "key": "A",
@@ -727,7 +727,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 30,
     "type": "single",
-    "question": "新小宸智能体中的\"通信助手\"功能是用什么替代了传统NLP+模板方案",
+    "question": "新小宸智能体中的\"通信助手\"功能是用什么替代了传统NLP+模板方案？",
     "options": [
       {
         "key": "A",
@@ -752,7 +752,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 31,
     "type": "single",
-    "question": "全域感知智能体的核心闭环流程是",
+    "question": "全域感知智能体的核心闭环流程是？",
     "options": [
       {
         "key": "A",
@@ -777,7 +777,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 32,
     "type": "single",
-    "question": "多模态大模型相比传统视觉小模型的优势不包括",
+    "question": "多模态大模型相比传统视觉小模型的优势不包括？",
     "options": [
       {
         "key": "A",
@@ -802,7 +802,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 33,
     "type": "single",
-    "question": "星辰智能体平台POC版最少需要几台CPU服务器",
+    "question": "星辰智能体平台POC版最少需要几台CPU服务器？",
     "options": [
       {
         "key": "A",
@@ -827,7 +827,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 34,
     "type": "single",
-    "question": "高可用版部署方案需要几台CPU服务器",
+    "question": "高可用版部署方案需要几台CPU服务器？",
     "options": [
       {
         "key": "A",
@@ -852,7 +852,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 35,
     "type": "single",
-    "question": "GPU推理场景中，计算所需卡数的主要依据是",
+    "question": "GPU推理场景中，计算所需卡数的主要依据是？",
     "options": [
       {
         "key": "A",
@@ -877,7 +877,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 36,
     "type": "single",
-    "question": "GPU分布式训练中，有效算力比例通常约为",
+    "question": "GPU分布式训练中，有效算力比例通常约为？",
     "options": [
       {
         "key": "A",
@@ -902,7 +902,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 37,
     "type": "single",
-    "question": "Graph RAG相比传统RAG的核心优势是",
+    "question": "Graph RAG相比传统RAG的核心优势是？",
     "options": [
       {
         "key": "A",
@@ -927,7 +927,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 38,
     "type": "single",
-    "question": "Agent RAG相比传统RAG增加了什么能力",
+    "question": "Agent RAG相比传统RAG增加了什么能力？",
     "options": [
       {
         "key": "A",
@@ -952,7 +952,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 39,
     "type": "single",
-    "question": "星辰智能体平台的内核使用什么语言编写",
+    "question": "星辰智能体平台的内核使用什么语言编写？",
     "options": [
       {
         "key": "A",
@@ -976,8 +976,8 @@ const QUIZ_DATA_NEW = [
   },
   {
     "id": 40,
-    "type": "multiple",
-    "question": "星辰智能体平台的职业认证由谁颁发",
+    "type": "single",
+    "question": "星辰智能体平台的职业认证由谁颁发？",
     "options": [
       {
         "key": "A",
@@ -996,13 +996,13 @@ const QUIZ_DATA_NEW = [
         "text": "科技部"
       },
     ],
-    "answer": "",
+    "answer": "B",
     "explanation": "暂无解析。"
   },
   {
     "id": 41,
     "type": "multiple",
-    "question": "深度学习的经典网络结构包括",
+    "question": "深度学习的经典网络结构包括？",
     "options": [
       {
         "key": "A",
@@ -1027,7 +1027,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 42,
     "type": "multiple",
-    "question": "Transformer架构的优势包括",
+    "question": "Transformer架构的优势包括？",
     "options": [
       {
         "key": "A",
@@ -1052,7 +1052,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 43,
     "type": "multiple",
-    "question": "大模型出现的\"智能涌现\"能力包括",
+    "question": "大模型出现的\"智能涌现\"能力包括？",
     "options": [
       {
         "key": "A",
@@ -1077,7 +1077,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 44,
     "type": "multiple",
-    "question": "AI研发范式的变化体现在",
+    "question": "AI研发范式的变化体现在？",
     "options": [
       {
         "key": "A",
@@ -1102,7 +1102,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 45,
     "type": "multiple",
-    "question": "大模型面临的技术挑战包括",
+    "question": "大模型面临的技术挑战包括？",
     "options": [
       {
         "key": "A",
@@ -1127,7 +1127,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 46,
     "type": "multiple",
-    "question": "星辰大模型覆盖的模态包括",
+    "question": "星辰大模型覆盖的模态包括？",
     "options": [
       {
         "key": "A",
@@ -1152,7 +1152,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 47,
     "type": "multiple",
-    "question": "大模型产业落地的B端趋势包括",
+    "question": "大模型产业落地的B端趋势包括？",
     "options": [
       {
         "key": "A",
@@ -1177,7 +1177,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 48,
     "type": "multiple",
-    "question": "智能体的优化方法包括",
+    "question": "智能体的优化方法包括？",
     "options": [
       {
         "key": "A",
@@ -1202,7 +1202,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 49,
     "type": "multiple",
-    "question": "自主规划智能体的特点包括",
+    "question": "自主规划智能体的特点包括？",
     "options": [
       {
         "key": "A",
@@ -1227,7 +1227,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 50,
     "type": "multiple",
-    "question": "工作流智能体的基础节点包括",
+    "question": "工作流智能体的基础节点包括？",
     "options": [
       {
         "key": "A",
@@ -1252,7 +1252,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 51,
     "type": "multiple",
-    "question": "工作流智能体的能力节点包括",
+    "question": "工作流智能体的能力节点包括？",
     "options": [
       {
         "key": "A",
@@ -1277,7 +1277,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 52,
     "type": "multiple",
-    "question": "工作流智能体的流程节点包括",
+    "question": "工作流智能体的流程节点包括？",
     "options": [
       {
         "key": "A",
@@ -1302,7 +1302,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 53,
     "type": "multiple",
-    "question": "提示词工程中，系统提示词包含的要素有",
+    "question": "提示词工程中，系统提示词包含的要素有？",
     "options": [
       {
         "key": "A",
@@ -1327,7 +1327,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 54,
     "type": "multiple",
-    "question": "RAG技术解决的大模型问题包括",
+    "question": "RAG技术解决的大模型问题包括？",
     "options": [
       {
         "key": "A",
@@ -1352,7 +1352,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 55,
     "type": "multiple",
-    "question": "智能体的记忆机制包括",
+    "question": "智能体的记忆机制包括？",
     "options": [
       {
         "key": "A",
@@ -1377,7 +1377,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 56,
     "type": "multiple",
-    "question": "记忆的存储方式包括",
+    "question": "记忆的存储方式包括？",
     "options": [
       {
         "key": "A",
@@ -1402,7 +1402,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 57,
     "type": "multiple",
-    "question": "模型微调的技术包括",
+    "question": "模型微调的技术包括？",
     "options": [
       {
         "key": "A",
@@ -1427,7 +1427,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 58,
     "type": "multiple",
-    "question": "智能体设计四阶段包括",
+    "question": "智能体设计四阶段包括？",
     "options": [
       {
         "key": "A",
@@ -1452,7 +1452,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 59,
     "type": "multiple",
-    "question": "适合智能体的场景四要点包括",
+    "question": "适合智能体的场景四要点包括？",
     "options": [
       {
         "key": "A",
@@ -1477,7 +1477,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 60,
     "type": "multiple",
-    "question": "企业智能化转型的四个关键包括",
+    "question": "企业智能化转型的四个关键包括？",
     "options": [
       {
         "key": "A",
@@ -1502,7 +1502,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 61,
     "type": "multiple",
-    "question": "多模态大模型相比传统视觉小模型的优势包括",
+    "question": "多模态大模型相比传统视觉小模型的优势包括？",
     "options": [
       {
         "key": "A",
@@ -1527,7 +1527,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 62,
     "type": "multiple",
-    "question": "硬件资源评估的三种资源类型是",
+    "question": "硬件资源评估的三种资源类型是？",
     "options": [
       {
         "key": "A",
@@ -1552,7 +1552,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 63,
     "type": "multiple",
-    "question": "存储资源的四种类型包括",
+    "question": "存储资源的四种类型包括？",
     "options": [
       {
         "key": "A",
@@ -1577,7 +1577,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 64,
     "type": "multiple",
-    "question": "星辰智能体平台的四大优势包括",
+    "question": "星辰智能体平台的四大优势包括？",
     "options": [
       {
         "key": "A",
@@ -1602,7 +1602,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 65,
     "type": "multiple",
-    "question": "星辰智能体平台预置的产业资产包括",
+    "question": "星辰智能体平台预置的产业资产包括？",
     "options": [
       {
         "key": "A",
@@ -1627,7 +1627,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 66,
     "type": "multiple",
-    "question": "星辰智能体平台支持的部署形态包括",
+    "question": "星辰智能体平台支持的部署形态包括？",
     "options": [
       {
         "key": "A",
@@ -1652,7 +1652,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 67,
     "type": "multiple",
-    "question": "超级智能体的技术框架核心包括",
+    "question": "超级智能体的技术框架核心包括？",
     "options": [
       {
         "key": "A",
@@ -1677,7 +1677,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 68,
     "type": "multiple",
-    "question": "超级智能体的定制能力包括",
+    "question": "超级智能体的定制能力包括？",
     "options": [
       {
         "key": "A",
@@ -1702,7 +1702,7 @@ const QUIZ_DATA_NEW = [
   {
     "id": 69,
     "type": "multiple",
-    "question": "星辰智能体平台的安全特性包括",
+    "question": "星辰智能体平台的安全特性包括？",
     "options": [
       {
         "key": "A",
@@ -1726,8 +1726,8 @@ const QUIZ_DATA_NEW = [
   },
   {
     "id": 70,
-    "type": "judge",
-    "question": "教培认证服务合作的高校包括",
+    "type": "multiple",
+    "question": "教培认证服务合作的高校包括？",
     "options": [
       {
         "key": "A",
@@ -1746,7 +1746,7 @@ const QUIZ_DATA_NEW = [
         "text": "清华大学"
       },
     ],
-    "answer": "",
+    "answer": "ABC",
     "explanation": "暂无解析。"
   },
   {

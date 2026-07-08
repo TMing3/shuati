@@ -40,14 +40,25 @@ for para in doc.paragraphs:
                     judge_answers[num] = ans
         continue
     
-    if text.startswith('一、单选题'):
-        current_section = 'single'
-        continue
-    elif text.startswith('二、多选题'):
-        current_section = 'multiple'
-        continue
-    elif text.startswith('三、判断题'):
-        current_section = 'judge'
+    if text.startswith('一、单选题') or text.startswith('二、多选题') or text.startswith('三、判断题'):
+        if current_question:
+            questions.append({
+                'id': current_question['id'],
+                'type': current_section,
+                'question': current_question['question'],
+                'options': current_options,
+                'answer': '',
+                'explanation': ''
+            })
+            current_question = None
+            current_options = []
+        
+        if text.startswith('一、单选题'):
+            current_section = 'single'
+        elif text.startswith('二、多选题'):
+            current_section = 'multiple'
+        elif text.startswith('三、判断题'):
+            current_section = 'judge'
         continue
     
     if text.startswith('**') and text.endswith('**'):
@@ -66,8 +77,6 @@ for para in doc.paragraphs:
             
             q_id = int(q_match.group(1))
             question_text = q_match.group(2).strip()
-            if question_text.endswith('？'):
-                question_text = question_text[:-1]
             current_question = {'id': q_id, 'question': question_text}
             current_options = []
         continue
