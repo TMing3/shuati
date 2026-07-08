@@ -1,12 +1,37 @@
-const STORAGE_KEY = "star-maas-quiz-progress-v1";
+const STORAGE_KEY_PREFIX = "star-maas-quiz-progress-";
 const MOBILE_MINIMAL_MODE_KEY = "star-maas-mobile-minimal-mode-v1";
 const MOBILE_FOCUS_MODE_KEY = "star-maas-mobile-focus-mode-v1";
+const MISTAKE_STATS_KEY_PREFIX = "star-maas-quiz-mistake-stats-";
+
+const QUESTION_BANKS = [
+  { key: "old", label: "原题库", data: QUIZ_DATA },
+  { key: "new", label: "课程测试题100道", data: QUIZ_DATA_NEW },
+];
 
 const FILTERS = [
   { key: "all", label: "全部", match: () => true },
   { key: "single", label: "单选", match: (q) => q.type === "single" },
   { key: "multiple", label: "多选", match: (q) => q.type === "multiple" },
   { key: "judge", label: "判断", match: (q) => q.type === "judge" },
+  {
+    key: "hard",
+    label: "易错",
+    match: (q, progress, mistakeStats) => {
+      const stat = mistakeStats[q.id];
+      if (!stat) return false;
+      if ((stat.attempts || 0) < 2) return false;
+      return (stat.wrongs || 0) / Math.max(stat.attempts || 0, 1) >= 0.5;
+    },
+    sort: (_a, _b, mistakeStats) => {
+      const a = mistakeStats[_a.id] || { attempts: 0, wrongs: 0 };
+      const b = mistakeStats[_b.id] || { attempts: 0, wrongs: 0 };
+      const aRate = a.attempts ? a.wrongs / a.attempts : -1;
+      const bRate = b.attempts ? b.wrongs / b.attempts : -1;
+      if (bRate !== aRate) return bRate - aRate;
+      if ((b.wrongs || 0) !== (a.wrongs || 0)) return (b.wrongs || 0) - (a.wrongs || 0);
+      return (_a.id || 0) - (_b.id || 0);
+    },
+  },
   {
     key: "wrong",
     label: "错题",
@@ -20,18 +45,29 @@ const TYPE_LABELS = {
   judge: "判断题",
 };
 
-const QUESTION_BANK = QUIZ_DATA.map((item) => {
-  if (item.type === "judge") {
-    return {
-      ...item,
-      options: [
-        { key: "✓", text: "正确" },
-        { key: "✕", text: "错误" },
-      ],
-    };
-  }
-  return item;
-});
+function getCurrentQuestionBank() {
+  const bank = QUESTION_BANKS.find((b) => b.key === state.currentBank) || QUESTION_BANKS[0];
+  return bank.data.map((item) => {
+    if (item.type === "judge") {
+      return {
+        ...item,
+        options: [
+          { key: "✓", text: "正确" },
+          { key: "✕", text: "错误" },
+        ],
+      };
+    }
+    return item;
+  });
+}
+
+function getStorageKey() {
+  return `${STORAGE_KEY_PREFIX}${state.currentBank}`;
+}
+
+function getMistakeStatsKey() {
+  return `${MISTAKE_STATS_KEY_PREFIX}${state.currentBank}`;
+}
 
 const elements = {
   totalCount: document.querySelector("#totalCount"),
@@ -56,6 +92,8 @@ const elements = {
   prevBtn: document.querySelector("#prevBtn"),
   nextBtn: document.querySelector("#nextBtn"),
   clearCurrentBtn: document.querySelector("#clearCurrentBtn"),
+  confirmMultiBtn: document.querySelector("#confirmMultiBtn"),
+  resetStatsBtn: document.querySelector("#resetStatsBtn"),
   resetAllBtn: document.querySelector("#resetAllBtn"),
   toggleNavBtn: document.querySelector("#toggleNavBtn"),
   toggleMinimalModeBtn: document.querySelector("#toggleMinimalModeBtn"),
@@ -63,19 +101,23 @@ const elements = {
   closeSidebarBtn: document.querySelector("#closeSidebarBtn"),
   sidebarOverlay: document.querySelector("#sidebarOverlay"),
   sidebar: document.querySelector("#sidebar"),
+  bankOldBtn: document.querySelector("#bankOldBtn"),
+  bankNewBtn: document.querySelector("#bankNewBtn"),
 };
 
 const state = {
+  currentBank: "old",
   filter: "all",
   currentIndex: 0,
   progress: loadProgress(),
+  mistakeStats: loadMistakeStats(),
   mobileMinimalMode: loadMode(MOBILE_MINIMAL_MODE_KEY, false),
   mobileFocusMode: loadMode(MOBILE_FOCUS_MODE_KEY, true),
 };
 
 function loadProgress() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(getStorageKey());
     if (!raw) return {};
     const parsed = JSON.parse(raw);
     return typeof parsed === "object" && parsed ? parsed : {};
@@ -85,7 +127,47 @@ function loadProgress() {
 }
 
 function saveProgress() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
+  localStorage.setItem(getStorageKey(), JSON.stringify(state.progress));
+}
+
+function loadMistakeStats() {
+  try {
+    const raw = localStorage.getItem(getMistakeStatsKey());
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return typeof parsed === "object" && parsed ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveMistakeStats() {
+  localStorage.setItem(getMistakeStatsKey(), JSON.stringify(state.mistakeStats));
+}
+
+function normalizeSelectedSignature(selected) {
+  return [...new Set(selected)].sort().join("");
+}
+
+function recordMistakeAttempt(question, selected) {
+  const signature = normalizeSelectedSignature(selected);
+  if (!signature) return;
+  const current = state.mistakeStats[question.id] || { attempts: 0, wrongs: 0, lastSig: "" };
+  if (current.lastSig === signature) return;
+
+  const isCorrect = isCorrectAnswer(question, new Set(selected));
+  current.attempts = (current.attempts || 0) + 1;
+  current.wrongs = (current.wrongs || 0) + (isCorrect ? 0 : 1);
+  current.lastSig = signature;
+  state.mistakeStats[question.id] = current;
+  saveMistakeStats();
+}
+
+function getMistakeSummary(questionId) {
+  const stat = state.mistakeStats[questionId];
+  if (!stat || !stat.attempts) return "";
+  const rate = Math.round((stat.wrongs / Math.max(stat.attempts, 1)) * 100);
+  return `历史错误率：${rate}%（${stat.wrongs}/${stat.attempts}）`;
 }
 
 function loadMode(storageKey, defaultValue) {
@@ -133,7 +215,12 @@ function syncMobileModes() {
 
 function getVisibleQuestions() {
   const currentFilter = FILTERS.find((item) => item.key === state.filter) || FILTERS[0];
-  return QUESTION_BANK.filter((question) => currentFilter.match(question, state.progress));
+  const QUESTION_BANK = getCurrentQuestionBank();
+  const filtered = QUESTION_BANK.filter((question) => currentFilter.match(question, state.progress, state.mistakeStats));
+  if (typeof currentFilter.sort === "function") {
+    return filtered.sort((a, b) => currentFilter.sort(a, b, state.mistakeStats));
+  }
+  return filtered;
 }
 
 function getCurrentQuestion() {
@@ -179,6 +266,23 @@ function setFilter(filterKey) {
   render();
 }
 
+function switchQuestionBank(bankKey) {
+  state.currentBank = bankKey;
+  state.filter = "all";
+  state.currentIndex = 0;
+  state.progress = loadProgress();
+  state.mistakeStats = loadMistakeStats();
+
+  if (elements.bankOldBtn) {
+    elements.bankOldBtn.classList.toggle("active", bankKey === "old");
+  }
+  if (elements.bankNewBtn) {
+    elements.bankNewBtn.classList.toggle("active", bankKey === "new");
+  }
+
+  render();
+}
+
 function toggleOption(question, optionKey) {
   const progress = ensureQuestionProgress(question.id);
   const selected = new Set(progress.selected);
@@ -197,8 +301,34 @@ function toggleOption(question, optionKey) {
   }
 
   progress.selected = [...selected];
-  progress.checked = progress.selected.length > 0;
-  progress.isCorrect = progress.checked ? isCorrectAnswer(question, selected) : false;
+
+  if (question.type === "multiple") {
+    progress.checked = false;
+    progress.isCorrect = false;
+  } else {
+    progress.checked = progress.selected.length > 0;
+    progress.isCorrect = progress.checked ? isCorrectAnswer(question, selected) : false;
+    recordMistakeAttempt(question, progress.selected);
+  }
+
+  saveProgress();
+  render();
+}
+
+function confirmMultipleAnswer() {
+  const question = getCurrentQuestion();
+  if (!question || question.type !== "multiple") return;
+
+  const progress = ensureQuestionProgress(question.id);
+  if (!progress.selected.length) {
+    window.alert("请先选择答案再确认。");
+    return;
+  }
+
+  const selectedSet = new Set(progress.selected);
+  progress.checked = true;
+  progress.isCorrect = isCorrectAnswer(question, selectedSet);
+  recordMistakeAttempt(question, progress.selected);
   saveProgress();
   render();
 }
@@ -259,6 +389,7 @@ function renderFilters() {
 }
 
 function renderStats() {
+  const QUESTION_BANK = getCurrentQuestionBank();
   const total = QUESTION_BANK.length;
   const answered = Object.values(state.progress).filter((item) => item.checked).length;
   const correct = Object.values(state.progress).filter((item) => item.checked && item.isCorrect).length;
@@ -301,6 +432,8 @@ function renderQuestion() {
     elements.questionTitle.textContent = "当前筛选条件下没有题目，请切换筛选后继续练习。";
     elements.optionsWrap.innerHTML = "";
     elements.resultPanel.className = "result-panel hidden";
+    document.body.classList.remove("needs-multi-confirm");
+    if (elements.confirmMultiBtn) elements.confirmMultiBtn.classList.add("hidden");
     return;
   }
 
@@ -311,6 +444,14 @@ function renderQuestion() {
   elements.questionBadge.textContent = TYPE_LABELS[question.type];
   elements.questionIndex.textContent = `第 ${question.id} 题`;
   elements.questionTitle.textContent = question.question;
+
+  const needsConfirm = question.type === "multiple";
+  document.body.classList.toggle("needs-multi-confirm", isMobileViewport() && needsConfirm);
+  if (elements.confirmMultiBtn) {
+    elements.confirmMultiBtn.classList.toggle("hidden", !needsConfirm);
+    elements.confirmMultiBtn.disabled = progress.checked || progress.selected.length === 0;
+    elements.confirmMultiBtn.textContent = progress.checked ? "已确认" : "确认答案";
+  }
 
   elements.optionsWrap.innerHTML = question.options.map((option) => {
     const classNames = ["option-btn"];
@@ -353,7 +494,10 @@ function renderResult(question, progress) {
   elements.resultMessage.textContent = progress.isCorrect
     ? "这题答对了，可以继续下一题。"
     : `你的答案：${formatSelected(progress.selected, question.type)}`;
-  elements.resultExplanation.textContent = question.explanation || "暂无解析。";
+  const mistakeSummary = getMistakeSummary(question.id);
+  elements.resultExplanation.textContent = mistakeSummary
+    ? `${mistakeSummary}\n${question.explanation || "暂无解析。"}`
+    : (question.explanation || "暂无解析。");
 }
 
 function formatSelected(selected, questionType) {
@@ -382,6 +526,13 @@ elements.filterBar.addEventListener("click", (event) => {
   setFilter(button.dataset.filter);
 });
 
+if (elements.bankOldBtn) {
+  elements.bankOldBtn.addEventListener("click", () => switchQuestionBank("old"));
+}
+if (elements.bankNewBtn) {
+  elements.bankNewBtn.addEventListener("click", () => switchQuestionBank("new"));
+}
+
 elements.questionNav.addEventListener("click", (event) => {
   const button = event.target.closest("[data-question-id]");
   if (!button) return;
@@ -397,6 +548,22 @@ elements.optionsWrap.addEventListener("click", (event) => {
 });
 
 elements.clearCurrentBtn.addEventListener("click", clearCurrentQuestion);
+elements.confirmMultiBtn.addEventListener("click", confirmMultipleAnswer);
+elements.resetStatsBtn.addEventListener("click", () => {
+  const shouldReset = window.confirm("确定要清空易错库统计吗？（不会影响答题进度）");
+  if (!shouldReset) return;
+  state.mistakeStats = {};
+  try {
+    localStorage.removeItem(MISTAKE_STATS_KEY);
+  } catch {
+    saveMistakeStats();
+  }
+  if (state.filter === "hard") {
+    state.filter = "all";
+    state.currentIndex = 0;
+  }
+  render();
+});
 elements.resetAllBtn.addEventListener("click", resetAllProgress);
 elements.prevBtn.addEventListener("click", () => moveQuestion(-1));
 elements.nextBtn.addEventListener("click", () => moveQuestion(1));

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>星辰智能体课程刷题页</title>
   <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
   <div class="app-shell">
     <header class="hero">
@@ -15,11 +17,19 @@
         <p class="hero-desc">题目和答案解析已从你的两个文档中整理完成，电脑和手机都能顺畅练题。</p>
       </div>
       <div class="hero-actions">
+        <div class="bank-switcher">
+          <span class="bank-label">题库：</span>
+          <div class="bank-btns">
+            <button id="bankOldBtn" class="ghost-btn bank-btn active" type="button">原题库</button>
+            <button id="bankNewBtn" class="ghost-btn bank-btn" type="button">课程测试题100道</button>
+          </div>
+        </div>
         <div class="mode-switches mobile-only">
           <button id="toggleMinimalModeBtn" class="ghost-btn mode-btn" type="button">极简</button>
           <button id="toggleFocusModeBtn" class="ghost-btn mode-btn" type="button">专注</button>
         </div>
         <button id="toggleNavBtn" class="ghost-btn mobile-only" type="button">题号面板</button>
+        <button id="resetStatsBtn" class="ghost-btn" type="button">清空易错库</button>
         <button id="resetAllBtn" class="ghost-btn" type="button">清空进度</button>
       </div>
     </header>
@@ -103,6 +113,7 @@
 
           <div class="question-actions">
             <button id="clearCurrentBtn" class="ghost-btn" type="button">重置本题</button>
+            <button id="confirmMultiBtn" class="primary-btn hidden" type="button">确认答案</button>
           </div>
 
           <section id="resultPanel" class="result-panel hidden" aria-live="polite">
@@ -122,6 +133,8 @@
   </div>
 
   <script src="./quiz-data.js"></script>
+  <script src="./quiz-data-new.js"></script>
   <script src="./app.js"></script>
 </body>
+
 </html>

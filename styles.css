@@ -89,8 +89,42 @@ button {
 
 .hero-actions {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   align-items: center;
+}
+
+.bank-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(54, 98, 255, 0.08);
+  border-radius: var(--radius-sm);
+}
+
+.bank-label {
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.bank-btns {
+  display: flex;
+  gap: 4px;
+}
+
+.bank-btn {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.bank-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
 }
 
 .stats-bar {
@@ -703,8 +737,11 @@ button {
     font-size: 14px;
   }
 
-  body.mobile-focus-mode .toolbar-actions,
-  body.mobile-focus-mode .question-actions {
+  body.mobile-focus-mode .toolbar-actions {
+    display: none;
+  }
+
+  body.mobile-focus-mode:not(.needs-multi-confirm) .question-actions {
     display: none;
   }
 
@@ -731,6 +768,10 @@ button {
   }
 
   body.mobile-minimal-mode #resetAllBtn {
+    display: none;
+  }
+
+  body.mobile-minimal-mode #resetStatsBtn {
     display: none;
   }
 
